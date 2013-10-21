@@ -13,19 +13,11 @@ class Game {
 	public Game(String challenge) {
 	challengeWord = challenge.toLowerCase()
 	guessWord = challengeWord.toCharArray()
-	//guessWord = new char[challengeWord.length()]
 	for (int i=0; i<guessWord.length; i++){
 	 if (guessWord[i] != ' ')
 		guessWord[i] = '_'
 	}
 	result = ResultType.ONGOING
 	}
-	
- 
-	// (max 7) if bad Guesses - DONE
-	// guessWord == challengeWord PLAYER WON! - DONE
-	// Persist game to File
-	// ANT Build
-	// 
 		
 }

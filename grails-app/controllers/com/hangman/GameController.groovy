@@ -1,7 +1,7 @@
 package com.hangman
 
 import com.hangman.Game
-import org.springframework.dao.DataIntegrityViolationException
+// import org.springframework.dao.DataIntegrityViolationException
 
 
 class GameController {
@@ -30,7 +30,6 @@ class GameController {
 		char c = params.guessedChar.toCharArray()[0]
 		def game = runGameService.checkGuess(c, session.game)
 		def listArray = Arrays.asList(game.badGuesses)
-		//		def listArray = game.badGuesses.asList()
 		Set<String> mySet = new HashSet<String>(listArray)
 		if (game.challengeWord.equals(new String(game.guessWord))){
 			game.result = Game.ResultType.WON
@@ -38,7 +37,6 @@ class GameController {
 		else if(game.badGuesses != null && mySet.size() > 6){
 			 game.result = Game.ResultType.LOST
 		}
-
 		
 		session.game = game
 		
@@ -50,7 +48,7 @@ class GameController {
 		log.error "guessed word $word"
 		log.error "Game status $gameResult"
 		log.error "Bad guesses list $gameBadGuesses"
-//		render(contentType: "text/json"){game}
+
 		  render (contentType: "application/json") {
 					       guessWord = word.capitalize() 
 						   result = gameResult
@@ -58,17 +56,5 @@ class GameController {
 				}			
 		
 	}
-    	
-	def upload() {
-		def f = request.getFile('myFile')
-		if (f.empty) {
-			flash.message = 'file cannot be empty'
-			render(view: 'index')
-			return
-		}
-		def newFile = new File(tempDir+File.separator+'challengeSamples.txt')
-		f.transferTo(newFile)
-//		response.sendError(200, 'Done')
-		redirect(controller:'game', action: 'newGameButton')
-	}
+
 }

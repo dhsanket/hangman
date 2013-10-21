@@ -15,33 +15,19 @@ class RunGameService {
 	}
 			
 	def Game checkGuess(char guessedChar, game){
-		// Game2 game = getGame()
 		log.error "$game.challengeWord <-- $guessedChar"
 		int charLocation = game.challengeWord.indexOf((int)guessedChar)
 		log.error "char location $charLocation"
 		if (charLocation != -1){
 			game = populateGoodGuesses(game, guessedChar)
 			log.error "populated Good Guesses $game.goodGuesses"
-//			return game
 		}
 		else {
 			game = populateBadGuesses(game, guessedChar)
 			log.error "populated bad Guesses $game.badGuesses"
-//			return game
 		}
 	return game
 	}
-	
-//	def Game checkGameStatus(game){
-//		if (game.challengeWord.equals(new String(game.guessWord))){
-//			game.result = Game.ResultType.WON
-//		}
-//		else if(game.badGuesses != null && game.badGuesses.length > 6){
-//			 game.result = Game.ResultType.LOST
-//		}
-//		
-//	return game	
-//	}	
 		
 	private Game populateGoodGuesses(game, char guessedChar){
 		if(game.goodGuesses == null){ game.goodGuesses = new char[1]

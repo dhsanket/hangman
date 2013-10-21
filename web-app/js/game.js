@@ -30,20 +30,15 @@ $(function(){
 			});
 		}
 
-		function processGame(gameJson) {
-			
+		function processGame(gameJson) {			
 			//alert(JSON.stringify(gameJson));
-			//var guessedWord = JSON.stringify(gameJson.guessWord);
-			// $('').appendTo('#guessedWord');
-			//$('body').append('<div id="guessedWord">'+ guessedWord +'</div><br />');
 			$("#guessWord").html(gameJson.guessWord);
 			console.log(gameJson.guessWord)
 			$("#result").html(gameJson.result);
 			console.log(gameJson.result)
 			$("#badGuesses").html(gameJson.badGuesses);
 			console.log(gameJson.badGuesses)			
-			// var game = JSON.parse(gameJson);
-			// alert(game.guessedWord);
+
 		}
  
 	});

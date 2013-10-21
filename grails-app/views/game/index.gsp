@@ -15,12 +15,7 @@
 
 		The quick and easy Hangman Game 
 		<p>built with Grails on the backend and HTML/js on the front </p>
-		<p> Upload Form: <br />
-			    <g:uploadForm action="upload">
-			        <input type="file" name="myFile" />
-			        <input type="submit" />
-			    </g:uploadForm>
-		</p>
+
 		<button> <g:link controller="game" action="newGameButton"> New Game  </g:link> </button>  
 		<div> You are allowed 6 mistakes </div>
 		<br />
