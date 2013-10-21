@@ -17,16 +17,10 @@ class GameController {
 			String word = new String(  session.game.guessWord)
 			log.error " session game loaded $session.game.guessWord"
 		}
-		//def game = session.game 
-
-		// log.error "$game.challengeWord"				
-		//  render (contentType: "application/json") {
-		//				   guessWord = word.capitalize()
-		//		}
-		
-		//render (contentType: "text/json") {game}
-        // redirect(action: "list", params: params)
-		//render view:'index' model: [guessWord : word]
+			
+		  render (contentType: "application/json") {
+						   guessWord = word.capitalize()
+				}
     }
 	
 	def newGameButton(){
@@ -59,19 +53,17 @@ class GameController {
 		String result = game.result
 		String badGuesses = new String(  game.badGuesses)
 		
-		log.error "$word"
-		log.error "$result"
-		log.error "$badGuesses"
-		// log.error "$game.challengeWord"
+		log.error "Challenege word $game.challengeWord"
+		log.error "guessed word $word"
+		log.error "Game status $result"
+		log.error "Bad guesses list $badGuesses"
 		
+		  render (contentType: "application/json") {
+					       guessWord = word.capitalize() 
+						   result = result.capitalize()
+						   badGuesses = badGuesses.capitalize()
+				}			
 		
-//		  render (contentType: "application/json") {
-//					       guessWord = word.capitalize() 
-//						   result = result.capitalize()
-//						   badGuesses = badGuesses.capitalize()
-//				}			
-		
-		// render game as JSON
 	}
     	
 	def upload() {
@@ -81,11 +73,9 @@ class GameController {
 			render(view: 'index')
 			return
 		}
-//		f.transferTo(new File(tempDir+File.separator+'challengeSamples.txt'))
 		def newFile = new File(tempDir+File.separator+'challengeSamples.txt')
 		f.transferTo(newFile)
 //		response.sendError(200, 'Done')
-//		newGame()
 		redirect(controller:'game', action: 'newGameButton')
 	}
 }
