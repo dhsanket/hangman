@@ -1,7 +1,5 @@
 package com.hangman
 
-import com.hangman.Game
-
 class RunGameService {
 	def tempDir = System.properties.getAt("java.io.tmpdir")
 	

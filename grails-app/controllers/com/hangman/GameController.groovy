@@ -1,9 +1,5 @@
 package com.hangman
 
-import com.hangman.Game
-// import org.springframework.dao.DataIntegrityViolationException
-
-
 class GameController {
 	def tempDir = System.properties.getAt("java.io.tmpdir")
 	RunGameService runGameService
