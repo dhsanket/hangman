@@ -1,6 +1,6 @@
 $(function(){
 	$( document ).ready(function() {
-
+		
 		$(".alphabet").each(function(index){
 			$( this ).click(function(){			
 				var currentId = $( this ).attr("id");

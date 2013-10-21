@@ -8,13 +8,13 @@
 	</head>
 	<body>
 		<style type="text/css">
-		#guessWord { position: absolute; font-size: 24px; left:100px;}
-		#result {}
+		#guessWord { position: relative; font-size: 24px; margin-left: 20px;}
+		#result {margin-top:3px;}
 		#badGuesses {}
 		</style>
 
 		The quick and easy Hangman Game 
-		<p>built with Grails(Ant build) on the backend and HTML/js on the front </p>
+		<p>built with Grails on the backend and HTML/js on the front </p>
 		<p> Upload Form: <br />
 			    <g:uploadForm action="upload">
 			        <input type="file" name="myFile" />
@@ -22,6 +22,8 @@
 			    </g:uploadForm>
 		</p>
 		<button> <g:link controller="game" action="newGameButton"> New Game  </g:link> </button>  
+		<div> You are allowed 6 mistakes </div>
+		<br />
 			<p>
 			<a href="#" class="alphabet" id="a" >A</a> 
 			<a href="#" class="alphabet" id="b" >B</a> 
@@ -53,9 +55,13 @@
 			<a href="#" class="alphabet" id="z" >Z</a>
 			</p>
 
-	<div id="guessWord"> </div>
-	<div id="result"> </div>
-	<div id="badGuesses"> </div>
+	<div id="guessWord"> "___ _____" </div>
+	<br />
+	<div> Game Status: 
+	<div id="result"> </div> </div>
+	<br />
+	<div> List of wrong Guesses; If you get more the 6 wrong Guesses, you lose the game.
+	<div id="badGuesses"> </div> </div>
 
 	
 	</body>

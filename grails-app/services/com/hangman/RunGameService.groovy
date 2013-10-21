@@ -68,7 +68,7 @@ class RunGameService {
 		}
 		else { game.badGuesses = Arrays.copyOf(game.badGuesses, game.badGuesses.length+1)
 			game.badGuesses[game.badGuesses.length-1] = guessedChar
-		}
+		}		
 	return game	
 	}
 	
