@@ -4,7 +4,6 @@ $(function(){
 		$(".alphabet").each(function(index){
 			$( this ).click(function(){			
 				var currentId = $( this ).attr("id");
-				//console.log( index + ": " + $( this ).text() );
 				sendGuess(currentId);
 				//console.log(currentId);
 			});

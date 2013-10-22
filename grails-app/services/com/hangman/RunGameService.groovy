@@ -13,27 +13,23 @@ class RunGameService {
 	}
 			
 	def Game checkGuess(char guessedChar, game){
-		log.error "$game.challengeWord <-- $guessedChar"
-		int charLocation = game.challengeWord.indexOf((int)guessedChar)
-		log.error "char location $charLocation"
-		if (charLocation != -1){
-			game = populateGoodGuesses(game, guessedChar)
-			log.error "populated Good Guesses $game.goodGuesses"
-		}
-		else {
-			game = populateBadGuesses(game, guessedChar)
-			log.error "populated bad Guesses $game.badGuesses"
+		if (game.result == Game.ResultType.ONGOING){
+			log.error "$game.challengeWord <-- $guessedChar"
+			int charLocation = game.challengeWord.indexOf((int)guessedChar)
+			log.error "char location $charLocation"
+			if (charLocation != -1){
+				game = populateGuessWord(game, guessedChar)
+				log.error "populated Good Guesses $game.goodGuesses"
+			}
+			else {
+				game = populateBadGuesses(game, guessedChar)
+				log.error "populated bad Guesses $game.badGuesses"
+			}
 		}
 	return game
 	}
 		
-	private Game populateGoodGuesses(game, char guessedChar){
-		if(game.goodGuesses == null){ game.goodGuesses = new char[1]
-			game.goodGuesses[0] = guessedChar
-		}
-		else { game.goodGuesses = Arrays.copyOf(game.goodGuesses, game.goodGuesses.length+1)
-			game.goodGuesses[game.goodGuesses.length-1] = guessedChar
-		}
+	private Game populateGuessWord(game, char guessedChar){
 		int index = 0
 		while(index > -1){
 			log.error "searching for guessed char from index $index"

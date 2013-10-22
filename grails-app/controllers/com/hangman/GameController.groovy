@@ -10,10 +10,7 @@ class GameController {
 			session.game = runGameService.startGame()
 			log.error " new game initiated $session.game.guessWord"
 			}
-		else {
-			String word = new String(  session.game.guessWord)
-			log.error " session game loaded $session.game.guessWord"
-		}
+
     }
 	
 	def newGameButton(){
@@ -23,10 +20,10 @@ class GameController {
 	}
 	
 	def checkGuess(){
-		char c = params.guessedChar.toCharArray()[0]
-		def game = runGameService.checkGuess(c, session.game)
-		def listArray = Arrays.asList(game.badGuesses)
-		Set<String> mySet = new HashSet<String>(listArray)
+		char[] c = params.guessedChar.toCharArray()
+		def game = runGameService.checkGuess(c[0], session.game)
+		def badGuessesList = Arrays.asList(game.badGuesses)
+		Set<String> mySet = new HashSet<String>(badGuessesList)
 		if (game.challengeWord.equals(new String(game.guessWord))){
 			game.result = Game.ResultType.WON
 		}
