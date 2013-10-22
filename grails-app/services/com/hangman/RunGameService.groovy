@@ -6,8 +6,7 @@ class RunGameService {
 	def tempDir = System.properties.getAt("java.io.tmpdir")
 
 	def Game startGame(){
-		Game game = getGame()
-		
+		Game game = getGame()		
 		return game
 	}
 			
@@ -50,9 +49,7 @@ class RunGameService {
 		}		
 	return game	
 	}
-	
-
-	
+		
 	private Game getGame(){
 		Game game					
 		File f = new File(tempDir+File.separator+'hangmanGameObject.txt')
@@ -82,10 +79,8 @@ class RunGameService {
 	
 	private String randomChallengePicker(){
 		def challenges = []
-		challenges = [ "Iron Man", "The Shard", "Nexmo", "Paris", "Coffee", "Java Beans", "California", "London" ] 
-		 
+		challenges = [ "Iron Man", "The Shard", "Nexmo", "Paris", "Coffee", "Java Beans", "California", "London" ] 	 
 		int randomIndex = new Random().nextInt(challenges.size())		
-		
 		return challenges[randomIndex]
 	}
 }

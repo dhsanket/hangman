@@ -10,9 +10,7 @@ class GameController {
     def index() {	
 		if (session.game==null){
 			session.game = runGameService.startGame()
-
 			}
-
     }
 	
 	def newGameButton(){
@@ -43,7 +41,7 @@ class GameController {
 		f.createNewFile()
 		log.error "file to be saved $f"
 		def json = new JsonBuilder()
-//		def jsonBody = 
+
 		json {
 			"challengeWord" game.challengeWord
 			"guessWord" game.guessWord
@@ -53,8 +51,7 @@ class GameController {
 			}
 		log.error " current game json $json"		
 		g.setText(json.toString())
-//		def out = new StringWriter()
-//		out << json
+
 
 		
 		String word = new String(  game.guessWord)
