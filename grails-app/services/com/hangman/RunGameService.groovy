@@ -1,14 +1,13 @@
 package com.hangman
+import groovy.json.*
+import java.io.*
 
 class RunGameService {
 	def tempDir = System.properties.getAt("java.io.tmpdir")
-	
-    def serviceMethod() {
 
-    }
-	
 	def Game startGame(){
 		Game game = getGame()
+		
 		return game
 	}
 			
@@ -55,23 +54,35 @@ class RunGameService {
 
 	
 	private Game getGame(){
-		Game game		
-		game = new Game(randomChallengePicker())
+		Game game					
+		File f = new File(tempDir+File.separator+'hangmanGameObject.txt')
+		log.error " saved file found $f"
+		def sizeOfFile = f.size()
+		def exists = f.exists()
+		log.error "file exists $exists size $sizeOfFile"
+			if(f.exists()){
+				if(f.getText() != null && f.getText().length()>0){
+//					f.delete()
+					def slurper = new JsonSlurper()
+					def jsonText = f.getText()
+					log.error "json from file $jsonText"
+					game = slurper.parseText( jsonText )
+					log.error "game from savedfile $game.challengeWord"
+					log.error " saved game initiated $game.guessWord"
+				} else {
+				game = new Game(randomChallengePicker())
+				log.error " new game initiated $game.guessWord"
+				}
+			}	else {
+				game = new Game(randomChallengePicker())
+				log.error " new game initiated $game.guessWord"
+			}			
 		return game
 	}
 	
 	private String randomChallengePicker(){
 		def challenges = []
-		File f = new File(tempDir+File.separator+'challengeSamples.txt')
-		
-		if (f.exists()){			
-			f.withReader { reader ->
-				String line = reader.readLine() 
-					while ( line != null){
-						challenges = line
-					}
-			}
-		} else { challenges = [ "Iron Man", "The Shard", "Nexmo", "Paris", "Coffee", "Java Beans", "California", "London" ] }
+		challenges = [ "Iron Man", "The Shard", "Nexmo", "Paris", "Coffee", "Java Beans", "California", "London" ] 
 		 
 		int randomIndex = new Random().nextInt(challenges.size())		
 		

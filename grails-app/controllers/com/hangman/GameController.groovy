@@ -1,4 +1,6 @@
 package com.hangman
+import groovy.json.*
+import java.io.File
 
 class GameController {
 	def tempDir = System.properties.getAt("java.io.tmpdir")
@@ -8,12 +10,14 @@ class GameController {
     def index() {	
 		if (session.game==null){
 			session.game = runGameService.startGame()
-			log.error " new game initiated $session.game.guessWord"
+
 			}
 
     }
 	
 	def newGameButton(){
+		File f = new File(tempDir+File.separator+'hangmanGameObject.txt')
+		f.delete()
 		session.game = runGameService.startGame()
 		log.error " new game initiated $session.game.guessWord"
 		render view:'index'		
@@ -32,6 +36,26 @@ class GameController {
 		}
 		
 		session.game = game
+		// save game progress
+		File f = new File(tempDir+File.separator+'hangmanGameObject.txt')
+		f.delete()
+		File g = new File(tempDir+File.separator+'hangmanGameObject.txt')
+		f.createNewFile()
+		log.error "file to be saved $f"
+		def json = new JsonBuilder()
+//		def jsonBody = 
+		json {
+			"challengeWord" game.challengeWord
+			"guessWord" game.guessWord
+			"badGuesses" game.badGuesses
+			"goodGuesses" game.goodGuesses
+			"result" game.result
+			}
+		log.error " current game json $json"		
+		g.setText(json.toString())
+//		def out = new StringWriter()
+//		out << json
+
 		
 		String word = new String(  game.guessWord)
 		String gameResult = game.result

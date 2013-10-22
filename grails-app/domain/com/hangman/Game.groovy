@@ -1,6 +1,6 @@
 package com.hangman
 
-class Game {
+class Game{
 	String challengeWord
 	char[] guessWord // if guessWord == challengeWord before badGuess==7 --> Player WON!
 	char[] badGuesses // (max 7) if max breached --> Player LOST!
